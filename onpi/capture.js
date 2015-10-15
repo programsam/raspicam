@@ -1,5 +1,6 @@
 var RaspiCam = require("raspicam");
 var request = require("request")
+var fs = require("fs")
 
 options = {
 	mode: "photo",
@@ -18,7 +19,7 @@ camera.on("read", function(err, timestamp, filename){
     console.log("Reading picture with timestamp " + timestamp + " and filename " + filename)
     
     formData = {
-    	file: fs.createReadStream(__dirname + './pics/cam.jpg')
+    	file: fs.createReadStream(__dirname + 'pics/cam.jpg')
     }
     
     request.post({url:'http://kn1.us:3090/upload', formData: formData}, 

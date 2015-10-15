@@ -17,9 +17,9 @@ s3.listObjects(params, function(err, data) {
   else     console.log(data);           // successful response
 });
 
-app.use('/static', express.static('files'))
+app.use(express.static('public'))
 
-app.get('/', function (req, res) {
+app.get('/list', function (req, res) {
   res.send('Hello World!');
 });
 

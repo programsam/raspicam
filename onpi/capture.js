@@ -24,9 +24,9 @@ camera.on("read", function(err, timestamp, filename){
     request.post({url:'http://kn1.us:3090/upload', formData: formData}, 
       function optionalCallback(err, httpResponse, body) {
 	  if (err) {
-	    return console.error('upload failed:', err);
+	    return console.error(err);
 	  }
-	  console.log('Upload successful!);
+	  console.log("Upload successful!");
 	});
 });
 

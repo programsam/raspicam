@@ -1,5 +1,5 @@
 {
-  "name": "dropcam",
+  "name": "dropcam-web",
   "version": "0.0.1",
   "description": "An example module to illustrate the usage of a package.json",
   "dependencies": {

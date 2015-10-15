@@ -1,4 +1,5 @@
 var RaspiCam = require("raspicam");
+var request = require("request")
 
 options = {
 	mode: "photo",

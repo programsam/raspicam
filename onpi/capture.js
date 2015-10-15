@@ -16,6 +16,18 @@ camera.on("start", function(){
 
 camera.on("read", function(err, timestamp, filename){ 
     console.log("Reading picture with timestamp " + timestamp + " and filename " + filename)
+    
+    formData = {
+    	file: fs.createReadStream(__dirname + './pics/cam.jpg')
+    }
+    
+    request.post({url:'http://kn1.us:3090/upload', formData: formData}, 
+      function optionalCallback(err, httpResponse, body) {
+	  if (err) {
+	    return console.error('upload failed:', err);
+	  }
+	  console.log('Upload successful!);
+	});
 });
 
 camera.on("stop", function(){

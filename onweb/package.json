@@ -4,7 +4,6 @@
   "description": "An example module to illustrate the usage of a package.json",
   "dependencies": {
     "express": "*",
-    "multer": "*",
-    "serve-index": "*"
+    "aws-sdk": "*"
   }
 }

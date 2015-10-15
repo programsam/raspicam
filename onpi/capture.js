@@ -10,16 +10,6 @@ var s3 = new AWS.S3({
 	secretAccessKey: settings.s3.secret_key
 })
 
-var params = {
-  Bucket: 'bensmith',
-  Prefix: '/dropcam'
-};
-s3.listObjects(params, function(err, data) {
-  if (err) console.log(err, err.stack); // an error occurred
-  else     console.log(data);           // successful response
-});
-
-
 options = {
 	mode: "photo",
 	output: "./pics/cam.jpg",
@@ -33,19 +23,9 @@ camera.on("start", function(){
     console.log("Started taking picture...")
 });
 
-camera.on("read", function(err, timestamp, filename){ 
-    console.log("Reading picture with timestamp " + timestamp + " and filename " + filename)
-    
-});
-
-camera.on("stop", function(){
-    console.log("Stopping...")
-});
-
 camera.on("exit", function(){
-   console.log("Met with timeout.")
-   
-   
+   console.log("Done taking picture. Uploading...")
+
    var params = {
 	   Bucket: 'bensmith', 
 	   Key: 'dropcam/' + Date.now() + '.jpg', 
@@ -54,20 +34,16 @@ camera.on("exit", function(){
 	   ContentType: 'image/jpeg'
    };
    s3.upload(params, function(err, data) {
-     console.log(err, data);
+     if (err)
+     {
+    	 console.log("Error while uploading picture: " + err)
+     }
+     else
+     {
+    	 console.log("Uploaded!")
+     }
    });
    
-//   formData = {
-//   	file: fs.createReadStream(__dirname + '/pics/cam.jpg')
-//   }
-//   
-//   request.post({url:'http://kn1.us:3090/upload', formData: formData}, 
-//     function optionalCallback(err, httpResponse, body) {
-//	  if (err) {
-//	    return console.error(err);
-//	  }
-//	  console.log("Upload successful!");
-//	});
 });
 
 setInterval(function() {

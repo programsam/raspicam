@@ -1,0 +1,6 @@
+{
+	"s3": {
+		"access_key": "key",
+		"secret_key": "secret"
+	}
+}

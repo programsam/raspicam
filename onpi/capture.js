@@ -44,17 +44,28 @@ camera.on("stop", function(){
 
 camera.on("exit", function(){
    console.log("Met with timeout.")
-   formData = {
-   	file: fs.createReadStream(__dirname + '/pics/cam.jpg')
-   }
    
-   request.post({url:'http://kn1.us:3090/upload', formData: formData}, 
-     function optionalCallback(err, httpResponse, body) {
-	  if (err) {
-	    return console.error(err);
-	  }
-	  console.log("Upload successful!");
-	});
+   
+   var params = {
+	   Bucket: 'bensmith', 
+	   Key: 'dropcam/' + Date.now() + '.jpg', 
+	   Body: fs.createReadStream(__dirname + '/pics/cam.jpg')
+   };
+   s3.upload(params, function(err, data) {
+     console.log(err, data);
+   });
+   
+//   formData = {
+//   	file: fs.createReadStream(__dirname + '/pics/cam.jpg')
+//   }
+//   
+//   request.post({url:'http://kn1.us:3090/upload', formData: formData}, 
+//     function optionalCallback(err, httpResponse, body) {
+//	  if (err) {
+//	    return console.error(err);
+//	  }
+//	  console.log("Upload successful!");
+//	});
 });
 
 setInterval(function() {

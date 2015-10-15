@@ -1,7 +1,8 @@
 var RaspiCam = require("raspicam");
 
 options = {
-		
+	mode: "photo",
+	output: "./pics"
 }
 
 var camera = new RaspiCam(options);

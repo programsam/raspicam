@@ -4,13 +4,53 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BINK.js</title>
-
-    <!-- Bootstrap and Custom CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <title>Dropcam</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script>
+	//https://s3.amazonaws.com/bensmith/dropcam/1444912499039.jpg
+	      function refreshList() {
+		   $.get( "/list", function( data ) {
+				toAdd = "<ul>"
+			  for (var j=0;j<data.length;j++)
+			  {
+				  toAdd += "<li><a href='javascript:viewImage(\"" + data[j].url + "\")'>" + data[j].name + "</a>" 
+			  }
+				toAdd += "</ul>"
+				$("#list").html(toAdd)
+				$("#viewing").attr('src', data[0].url)
+			});
+	   }
+	   
+	   function viewImage(url) {
+		   $("#viewing").attr('src', url)
+	   }
+	   
+	   setInterval(function() {
+		   $.get( "/list", function( data ) {
+				toAdd = "<ul>"
+			  for (var j=0;j<data.length;j++)
+			  {
+				  toAdd += "<li><a href='javascript:viewImage(\"" + data[j].url + "\")'>" + data[j].name + "</a>" 
+			  }
+				toAdd += "</ul>"
+				$("#list").html(toAdd)
+				$("#viewing").attr('src', data[data.length-1].url)
+			});
+	   }, 5000);
+	   refreshList();
+	</script>
   </head>
 <body>
-	Welcome!
+<div class='row'>
+	<div class='col-md-4'>
+		<div id='list'></div>
+	</div>
+	<div class='col-md-8'>
+		<img src='' id='viewing' />
+	</div>
+</div>
 </body>
 </html>

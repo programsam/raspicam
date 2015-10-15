@@ -1,7 +1,7 @@
 var RaspiCam = require("raspicam");
 var request = require("request")
 var fs = require("fs")
-var aws = require("aws-sdk")
+var AWS = require("aws-sdk")
 
 var settings = require('./settings')
 

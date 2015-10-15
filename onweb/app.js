@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var multer = require('multer')
+var serveIndex = require('serve-index')
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -13,6 +14,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage })
 
+app.use('/static', serveIndex('files')
 app.use('/static', express.static('files', {index: "index.html"}))
 
 app.get('/', function (req, res) {

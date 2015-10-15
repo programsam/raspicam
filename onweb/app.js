@@ -11,8 +11,6 @@ var upload = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage })
-
 app.use('/static', express.static('files'))
 
 app.get('/', function (req, res) {

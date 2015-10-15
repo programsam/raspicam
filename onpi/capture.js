@@ -22,7 +22,9 @@ camera.on("stop", function(){
 });
 
 camera.on("exit", function(){
-    setTimeout(5000, function() { camera.start() })
+   console.log("Met with timeout.")
 });
 
-camera.start();
+setInterval(function() {
+	camera.start()
+}, 5000)

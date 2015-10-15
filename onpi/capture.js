@@ -48,6 +48,6 @@ camera.on("exit", function(){
 
 setInterval(function() {
 	camera.start()
-}, 5000)
+}, 60000)
 
 camera.start()

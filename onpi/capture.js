@@ -51,7 +51,7 @@ camera.on("exit", function(){
 	   Key: 'dropcam/' + Date.now() + '.jpg', 
 	   Body: fs.createReadStream(__dirname + '/pics/cam.jpg'),
 	   ACL: 'public-read',
-	   Content-Type: 'image/jpeg'
+	   ContentType: 'image/jpeg'
    };
    s3.upload(params, function(err, data) {
      console.log(err, data);

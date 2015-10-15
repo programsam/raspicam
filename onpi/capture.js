@@ -49,7 +49,9 @@ camera.on("exit", function(){
    var params = {
 	   Bucket: 'bensmith', 
 	   Key: 'dropcam/' + Date.now() + '.jpg', 
-	   Body: fs.createReadStream(__dirname + '/pics/cam.jpg')
+	   Body: fs.createReadStream(__dirname + '/pics/cam.jpg'),
+	   ACL: 'public-read',
+	   Content-Type: 'image/jpeg'
    };
    s3.upload(params, function(err, data) {
      console.log(err, data);

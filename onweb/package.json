@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "description": "An example module to illustrate the usage of a package.json",
   "dependencies": {
-    "raspicam": "*"
+    "express": "*"
   }
 }

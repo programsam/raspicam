@@ -4,7 +4,8 @@ var multer = require('multer')
 
 var upload = multer({dest: 'files/'})
 
-express.static(__dirname + "/files")
+app.use('/static', express.static('files'))
+
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });

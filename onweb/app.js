@@ -25,8 +25,6 @@ app.get('/list', function (req, res) {
 	  }
 	  else
 	  {
-		  //console.log(data)
-		  //var parsedObject = JSON.parse(data)
 		  var toSend = []
 		  for (var j=0;j<data.Contents.length;j++)
 		  {

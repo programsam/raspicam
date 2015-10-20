@@ -16,6 +16,7 @@
 				toAdd = "<ul>"
 			  for (var j=0;j<data.length;j++)
 			  {
+				  var longDateFormat  = 'dd/MM/yyyy HH:mm:ss';
 				  var displayDate = $.format.date(data[j].name, longDateFormat)
 				  toAdd += "<li><a href='javascript:viewImage(\"" + data[j].url + "\")'>" + displayDate + "</a>" 
 			  }

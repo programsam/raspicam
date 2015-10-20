@@ -14,7 +14,7 @@ var params = {
 };
 
 
-app.use(__dirname + express.static('public'))
+app.use(express.static(__dirname + 'public'))
 
 app.get('/list', function (req, res) {
 	s3.listObjects(params, function(err, data) {

@@ -16,6 +16,7 @@
 				toAdd = "<ul>"
 			  for (var j=0;j<data.length;j++)
 			  {
+				  var formatted = $.datepicker.formatDate("M d, yy", new Date(data[j].name));
 				  toAdd += "<li><a href='javascript:viewImage(\"" + data[j].url + "\")'>" + data[j].name + "</a>" 
 			  }
 				toAdd += "</ul>"

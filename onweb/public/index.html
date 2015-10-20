@@ -17,8 +17,8 @@
 				toAdd = "<ul>"
 			  for (var j=0;j<data.length;j++)
 			  {
-				  var formatted = $.datepicker.formatDate("M d, yy", new Date(data[j].name));
-				  toAdd += "<li><a href='javascript:viewImage(\"" + data[j].url + "\")'>" + formatted + "</a>" 
+				  var displayDate = $.format.date(data[j].name, longDateFormat)
+				  toAdd += "<li><a href='javascript:viewImage(\"" + data[j].url + "\")'>" + displayDate + "</a>" 
 			  }
 				toAdd += "</ul>"
 				$("#list").html(toAdd)
@@ -30,20 +30,7 @@
 		   $("#viewing").attr('src', url)
 	   }
 	   
-	   setInterval(function() {
-		   $.get( "/list", function( data ) {
-				toAdd = "<ul>"
-			  for (var j=0;j<data.length;j++)
-			  {
-				  var longDateFormat  = 'dd/MM/yyyy HH:mm:ss';
-				  var displayDate = $.format.date(data[j].name, longDateFormat)
-				  toAdd += "<li><a href='javascript:viewImage(\"" + data[j].url + "\")'>" + displayDate + "</a>" 
-			  }
-				toAdd += "</ul>"
-				$("#list").html(toAdd)
-				$("#viewing").attr('src', data[data.length-1].url)
-			});
-	   }, 60000);
+	   setInterval(refreshList, 60000);
 	   refreshList();
 	</script>
   </head>

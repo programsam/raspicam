@@ -8,7 +8,7 @@ var s3 = new AWS.S3({
 	secretAccessKey: settings.s3.secret_key
 })
 
-var params = {
+var listParams = {
   Bucket: 'bensmith',
   Prefix: 'dropcam/'
 };
@@ -17,7 +17,7 @@ var params = {
 app.use(express.static(__dirname + '/public'))
 
 app.get('/list', function (req, res) {
-	s3.listObjects(params, function(err, data) {
+	s3.listObjects(listParams, function(err, data) {
 	  if (err)
 	  {
 		  console.log(err, err.stack); 
@@ -45,6 +45,42 @@ app.get('/list', function (req, res) {
 	});
 });
 
+var deleteParams = {
+  Bucket: 'bensmith', 
+  Delete: {},
+};
+
+app.get('/clear', function (req, res) {
+	s3.listObjects(listParams, function(err, data) {
+	  if (err)
+	  {
+		  res.json({"message":"Error while listing objects to delete.", "error": err}) 
+	  }
+	  else
+	  {
+		  var toDelete = []
+		  for (var j=1;j<data.Contents.length;j++)
+		  {
+			  var thisObject = {}
+			  thisObject.Key = data.Contents[j].Key
+			  thisObject.VersionId = 'null'
+			  toDelete.push(thisObject)
+		  }
+		  deleteParams.Delete.Objects = toDelete
+		  s3.deleteObjects(deleteParams, function(deleteErr, deleteData) {
+			  if (deleteErr)
+			  {
+				  console.log(deleteErr);
+				  res.json({"message":"Error while deleting objects.", "error": deleteErr})
+			  }
+			  else
+			  {
+				 res.json({"message":"Objects deleted."}) 
+			  }
+		  })
+	  }
+	});
+})
 
 var server = app.listen(3002, function () {
   var host = server.address().address;

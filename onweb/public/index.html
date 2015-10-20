@@ -13,7 +13,8 @@
 	<script>
 	      function refreshList() {
 		   $.get( "/list", function( data ) {
-				toAdd = "<ul>"
+			   toAdd = "<a href='javascript:clear()'>Clear</a>"
+				toAdd += "<ul>"
 			  for (var j=0;j<data.length;j++)
 			  {
 				  var longDateFormat  = 'dd/MM/yyyy HH:mm:ss';
@@ -21,10 +22,17 @@
 				  toAdd += "<li><a href='javascript:viewImage(\"" + data[j].url + "\")'>" + displayDate + "</a>" 
 			  }
 				toAdd += "</ul>"
+				
 				$("#list").html(toAdd)
 				$("#viewing").attr('src', data[0].url)
 			});
-	   }
+	   	}
+	      
+	      function clear() {
+	    	  $.get( "/list", function( data ) {
+	    		refreshList()  
+	    	  })
+	      }
 	   
 	   function viewImage(url) {
 		   $("#viewing").attr('src', url)

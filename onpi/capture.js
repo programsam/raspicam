@@ -12,11 +12,12 @@ var s3 = new AWS.S3({
 
 options = {
 	mode: "photo",
-	output: "./pics/cam.jpg",
+	output: "",
 	rot: 180
 }
 
 console.log("Initializing the camera...")
+options.output = __dirname + '/pics/cam.jpg'
 var camera = new RaspiCam(options);
 
 
@@ -26,15 +27,15 @@ camera.on("start", function(){
 
 function deleteLocalPicture() {
 	fs.unlink(__dirname + '/pics/cam.jpg', function (err) {
- 		  if (err)
- 		  {
- 			console.log('Error while trying to delete: ' + err)  
- 		  }
- 		  else 
- 		  {
- 		  	console.log('Successfully deleted previous picture.');
- 		  }
- 		});
+	  if (err)
+	  {
+		console.log('Error while trying to delete: ' + err)  
+	  }
+	  else 
+	  {
+	  	console.log('Successfully deleted previous picture.');
+	  }
+	});
 }
 
 camera.on("exit", function(){

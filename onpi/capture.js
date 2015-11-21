@@ -47,17 +47,17 @@ camera.on("exit", function(){
 });
 
 setInterval(function() {
-	camera.start()
 	fs.unlink(__dirname + '/pics/cam.jpg', function (err) {
-	  if (err)
-	  {
-		console.log('Error while trying to delete: ' + err)  
-	  }
-	  else 
-	  {
-	  	console.log('Successfully deleted previous picture.');
-	  }
-	});
+		  if (err)
+		  {
+			console.log('Error while trying to delete: ' + err)  
+		  }
+		  else 
+		  {
+		  	console.log('Successfully deleted previous picture.');
+		  }
+		});
+	camera.start()
 }, 60000)
 
 camera.start()

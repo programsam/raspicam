@@ -16,12 +16,26 @@ options = {
 	rot: 180
 }
 
+console.log("Initializing the camera...")
 var camera = new RaspiCam(options);
 
 
 camera.on("start", function(){
     console.log("Started taking picture...")
 });
+
+function deleteLocalPicture() {
+	fs.unlink(__dirname + '/pics/cam.jpg', function (err) {
+ 		  if (err)
+ 		  {
+ 			console.log('Error while trying to delete: ' + err)  
+ 		  }
+ 		  else 
+ 		  {
+ 		  	console.log('Successfully deleted previous picture.');
+ 		  }
+ 		});
+}
 
 camera.on("exit", function(){
    console.log("Done taking picture. Uploading...")
@@ -37,26 +51,18 @@ camera.on("exit", function(){
      if (err)
      {
     	 console.log("Error while uploading picture: " + err)
+    	 deleteLocalPicture();
      }
      else
      {
     	 console.log("Uploaded!")
+    	 deleteLocalPicture();
      }
    });
    
 });
 
 setInterval(function() {
-	fs.unlink(__dirname + '/pics/cam.jpg', function (err) {
-		  if (err)
-		  {
-			console.log('Error while trying to delete: ' + err)  
-		  }
-		  else 
-		  {
-		  	console.log('Successfully deleted previous picture.');
-		  }
-		});
 	camera.start()
 }, 60000)
 

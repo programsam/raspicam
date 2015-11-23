@@ -53,6 +53,7 @@ var deleteParams = {
 };
 
 app.post('/delete', function (req, res) {
+	console.log("Request body was: " + JSON.stringify(req.body))
 	deleteParams.Delete.Objects = []
 	console.log("Trying to delete: " + req.body.key)
 	deleteParams.Delete.Objects.push({

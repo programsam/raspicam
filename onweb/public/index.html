@@ -43,11 +43,11 @@
 	    	  })
 	      }
 	      
-	      function delPic(name) {
+	      function delPic(passedKey) {
 	    	  $.ajax({
 	    		  method: "POST",
 	    		  url: "/delete",
-	    		  data: { "key": name }
+	    		  data: { "key": passedKey }
 	    	  }). done(function (msg) {
 	    		  console.log("Data sent, reply: " + msg)
 	    	  })

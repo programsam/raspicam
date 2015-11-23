@@ -44,7 +44,7 @@
 	      }
 	      
 	      function delPic(name) {
-	    	  $.put('/delete/' + name, function( data ) {
+	    	  $.post('/delete/' + name, function( data ) {
 	    		  refreshList()
 	    	  })
 	      }

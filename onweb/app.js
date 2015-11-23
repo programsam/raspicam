@@ -30,6 +30,7 @@ app.get('/list', function (req, res) {
 		  {
 			  var thisObject = {}
 			  thisone = data.Contents[j].Key
+			  console.log("the key: " + data.Contents[j].Key)
 			  if (thisone.substr(thisone.length-3, thisone.length) === "jpg")
 			  {
 				  thisObject.url = "https://s3.amazonaws.com/bensmith/" +
@@ -52,6 +53,7 @@ var deleteParams = {
 
 app.post('/delete/:name', function (req, res) {
 	deleteParams.Delete.Objects = []
+	console.log("Trying to delete: " + req.params.name)
 	deleteParams.Delete.Objects.push({
 		Key: req.params.name,
 		VersionId: 'null'
@@ -64,7 +66,6 @@ app.post('/delete/:name', function (req, res) {
 		  }
 		  else
 		  {
-			  console.log("I think the objects were deleted OK.")
 			 res.json({"message":"Objects deleted."}) 
 		  }
 	  })

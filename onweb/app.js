@@ -30,7 +30,6 @@ app.get('/list', function (req, res) {
 		  {
 			  var thisObject = {}
 			  thisone = data.Contents[j].Key
-			  console.log("the key: " + data.Contents[j].Key)
 			  if (thisone.substr(thisone.length-3, thisone.length) === "jpg")
 			  {
 				  thisObject.url = "https://s3.amazonaws.com/bensmith/" +

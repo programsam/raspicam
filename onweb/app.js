@@ -53,7 +53,7 @@ var deleteParams = {
 app.delete('/img/:name', function (req, res) {
 	deleteParams.Delete.Objects = []
 	deleteParams.Delete.Objects.push({
-		Key: req.params.name
+		Key: req.params.name,
 		VersionId = 'null'
 	})
 	s3.deleteObjects(deleteParams, function(deleteErr, deleteData) {

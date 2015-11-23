@@ -14,14 +14,23 @@
 	      function refreshList() {
 		   $.get( "/list", function( data ) {
 			   toAdd = "<a href='javascript:clear()'>Clear</a>"
-				toAdd += "<ul>"
+			   toAdd += "<div class='row'>"
+			</div>
+			   var i = 0;
 			  for (var j=0;j<data.length;j++)
 			  {
 				  var longDateFormat  = 'dd/MM/yyyy HH:mm:ss';
 				  var displayDate = $.format.date(data[j].name, longDateFormat)
+				  toAdd += "<div class='col-md-2'>"
 				  toAdd += "<img width='200px' src='" + data[j].url + "' /><br />" + displayDate
+				  toAdd += "</div>"
+				  i++;
+				  if (i==6)
+				  {
+					  toAdd += "</row><row>"
+					  i = 0;
+				  }
 			  }
-				toAdd += "</ul>"
 				
 				$("#list").html(toAdd)
 				$("#viewing").attr('src', data[0].url)
@@ -38,10 +47,7 @@
 	</script>
   </head>
 <body>
-<div class='row'>
-	<div class='col-md-4'>
-		<div id='list'></div>
-	</div>
-</div>
+<div id='panels'></div>
+
 </body>
 </html>

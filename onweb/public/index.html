@@ -46,6 +46,7 @@
 	      function delPic(passedKey) {
 	    	  $.ajax({
 	    		  method: "POST",
+	    		  dataType: "json",
 	    		  url: "/delete",
 	    		  contentType: "application/json",
 	    		  data: { "key": passedKey }

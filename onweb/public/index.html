@@ -49,7 +49,8 @@
 	    		  url: "/delete",
 	    		  data: { "key": passedKey }
 	    	  }). done(function (msg) {
-	    		  console.log("Data sent, reply: " + msg)
+	    		  console.log("Data sent, reply: " + JSON.stringify(msg))
+	    		  refreshList()
 	    	  })
 	      }
 	   

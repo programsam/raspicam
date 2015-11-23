@@ -47,6 +47,7 @@
 	    	  $.ajax({
 	    		  method: "POST",
 	    		  url: "/delete",
+	    		  contentType: "application/json",
 	    		  data: { "key": passedKey }
 	    	  }). done(function (msg) {
 	    		  console.log("Data sent, reply: " + msg)

@@ -54,7 +54,7 @@ var deleteParams = {
 
 app.post('/delete', function (req, res) {
 	deleteParams.Delete.Objects = []
-	console.log("Trying to delete: " + req.params.name)
+	console.log("Trying to delete: " + req.body.key)
 	deleteParams.Delete.Objects.push({
 		Key: req.params.name,
 		VersionId: 'null'

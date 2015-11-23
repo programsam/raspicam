@@ -50,7 +50,7 @@ var deleteParams = {
   Delete: {},
 };
 
-app.delete('/img/:name', function (req, res) {
+app.put('/delete/:name', function (req, res) {
 	deleteParams.Delete.Objects = []
 	deleteParams.Delete.Objects.push({
 		Key: req.params.name,

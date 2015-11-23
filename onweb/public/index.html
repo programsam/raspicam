@@ -21,7 +21,8 @@
 				  var longDateFormat  = 'dd/MM/yyyy HH:mm:ss';
 				  var displayDate = $.format.date(data[j].name, longDateFormat)
 				  toAdd += "<div class='col-md-2'>"
-				  toAdd += "<img width='200px' src='" + data[j].url + "' /><br />" + displayDate
+				  toAdd += "<a target='_blank' href='" + data[j].url +"'>"
+				  toAdd += "<img border=0 width='200px' src='" + data[j].url + "' /></a><br />" + displayDate
 				  toAdd += "</div>"
 				  i++;
 				  if (i==6)

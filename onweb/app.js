@@ -37,7 +37,7 @@ app.get('/list', function (req, res) {
 				  var length = thisone.indexOf('.') - thisone.indexOf('/') - 1
 				  thisObject.timestamp = thisone.substr(thisone.indexOf('/')+1, length)
 				  thisObject.name = new Date(parseInt(thisObject.timestamp))
-				  thisObject.key = data.Contents[j].key
+				  thisObject.key = data.Contents[j].Key
 				  toSend.push(thisObject)
 			  }
 		  }

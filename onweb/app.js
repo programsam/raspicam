@@ -64,6 +64,7 @@ app.post('/delete/:name', function (req, res) {
 		  }
 		  else
 		  {
+			  console.log("I think the objects were deleted OK.")
 			 res.json({"message":"Objects deleted."}) 
 		  }
 	  })

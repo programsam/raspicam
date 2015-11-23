@@ -19,7 +19,7 @@
 			  {
 				  var longDateFormat  = 'dd/MM/yyyy HH:mm:ss';
 				  var displayDate = $.format.date(data[j].name, longDateFormat)
-				  toAdd += "<li><a href='javascript:viewImage(\"" + data[j].url + "\")'>" + displayDate + "</a>" 
+				  toAdd += "<img src='" + data[j].url + "' /><br />" + displayDate
 			  }
 				toAdd += "</ul>"
 				
@@ -34,11 +34,6 @@
 	    	  })
 	      }
 	   
-	   function viewImage(url) {
-		   $("#viewing").attr('src', url)
-	   }
-	   
-	   setInterval(refreshList, 60000);
 	   refreshList();
 	</script>
   </head>
@@ -46,9 +41,6 @@
 <div class='row'>
 	<div class='col-md-4'>
 		<div id='list'></div>
-	</div>
-	<div class='col-md-8'>
-		<img src='' id='viewing' />
 	</div>
 </div>
 </body>

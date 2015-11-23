@@ -56,7 +56,7 @@ app.post('/delete', function (req, res) {
 	deleteParams.Delete.Objects = []
 	console.log("Trying to delete: " + req.body.key)
 	deleteParams.Delete.Objects.push({
-		Key: req.body.key
+		Key: req.body.key,
 		VersionId: 'null'
 	})
 	s3.deleteObjects(deleteParams, function(deleteErr, deleteData) {

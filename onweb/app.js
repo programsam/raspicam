@@ -50,6 +50,25 @@ var deleteParams = {
   Delete: {},
 };
 
+app.delete('/img/:name', function (req, res) {
+	deleteParams.Delete.Objects = []
+	deleteParams.Delete.Objects.push({
+		Key: req.params.name
+		VersionId = 'null'
+	})
+	s3.deleteObjects(deleteParams, function(deleteErr, deleteData) {
+		  if (deleteErr)
+		  {
+			  console.log(deleteErr);
+			  res.json({"message":"Error while deleting objects.", "error": deleteErr})
+		  }
+		  else
+		  {
+			 res.json({"message":"Objects deleted."}) 
+		  }
+	  })
+})
+
 app.get('/clear', function (req, res) {
 	s3.listObjects(listParams, function(err, data) {
 	  if (err)

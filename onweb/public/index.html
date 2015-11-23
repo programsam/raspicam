@@ -42,6 +42,12 @@
 	    		refreshList()  
 	    	  })
 	      }
+	      
+	      function delete(name) {
+	    	  $.delete('/img/' + name, function data {
+	    		  
+	    	  })
+	      }
 	   
 	   refreshList();
 	</script>

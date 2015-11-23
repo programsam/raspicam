@@ -1,6 +1,7 @@
 var express = require('express');
 var AWS = require('aws-sdk')
 var app = express();
+var bodyParser = require('body-parser')
 
 var settings = require('./settings')
 var s3 = new AWS.S3({
@@ -13,7 +14,7 @@ var listParams = {
   Prefix: 'dropcam/'
 };
 
-
+app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'))
 
 app.get('/list', function (req, res) {
@@ -51,7 +52,7 @@ var deleteParams = {
   Delete: {},
 };
 
-app.post('/delete/:name', function (req, res) {
+app.post('/delete', function (req, res) {
 	deleteParams.Delete.Objects = []
 	console.log("Trying to delete: " + req.params.name)
 	deleteParams.Delete.Objects.push({

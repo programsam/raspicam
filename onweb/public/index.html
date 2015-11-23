@@ -44,8 +44,12 @@
 	      }
 	      
 	      function delPic(name) {
-	    	  $.post('/delete/' + name, function( data ) {
-	    		  refreshList()
+	    	  $.ajax({
+	    		  method: "POST",
+	    		  url: "/delete",
+	    		  data: { "key": name }
+	    	  }). done(function (msg) {
+	    		  console.log("Data sent.")
 	    	  })
 	      }
 	   

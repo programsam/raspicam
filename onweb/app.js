@@ -4,10 +4,13 @@ var app = express();
 var bodyParser = require('body-parser')
 
 var settings = require('./settings')
+var options = require('./defaults')
 var s3 = new AWS.S3({
 	accessKeyId: settings.s3.access_key,
 	secretAccessKey: settings.s3.secret_key
 })
+
+console.log(JSON.stringify(settings))
 
 var listParams = {
   Bucket: 'bensmith',

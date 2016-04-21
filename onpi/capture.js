@@ -10,6 +10,12 @@ var s3 = new AWS.S3({
 	secretAccessKey: settings.s3.secret_key
 })
 
+request('http://cam.kn1.us', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        console.log(body);
+    }
+});
+
 options = {
 	mode: "photo",
 	output: "",

@@ -1,5 +1,5 @@
 {
 	"rotation": 0,
-	"interval": 60,
+	"interval": 60000,
 	"on": true
 }

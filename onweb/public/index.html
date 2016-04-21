@@ -14,7 +14,9 @@
 		  $( document ).ready(function() {
 			  $('#update-settings').click(function() {
 				  options = {
-						  rotation: parseInt($('#rotation').val())
+						  rotation: parseInt($('#rotation').val()),
+						  interval: parseInt($('#interval').val()),
+						  on: true
 				  }
 				  $.ajax({
 					  url: "/options",
@@ -79,8 +81,10 @@
 </body>
 <div id='settings' class='panel'>
 <div class="form-group">
-  <label for="exampleInputEmail1">Rotation</label>
+  <label for="rotation">Rotation</label>
   <input type="text" class="form-control" id="rotation" placeholder="0">
+  <label for="interval">Interval (in milliseconds)</label>
+  <input type="text" class="form-control" id="interval" placeholder="60000">
 </div>
 <button id='update-settings' class="btn btn-default">Submit</button>
 </div>

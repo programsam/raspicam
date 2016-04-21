@@ -20,6 +20,10 @@ var listParams = {
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/public'))
 
+app.get('/options', function(req, res) {
+	res.json(options)
+})
+
 app.get('/list', function (req, res) {
 	s3.listObjects(listParams, function(err, data) {
 	  if (err)

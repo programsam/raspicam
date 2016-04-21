@@ -10,11 +10,18 @@ var s3 = new AWS.S3({
 	secretAccessKey: settings.s3.secret_key
 })
 
-request('http://cam.kn1.us/options', function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log(body);
-    }
-});
+var options = {};
+
+function updateSettings() {
+	request(settings.base_url + '/options', function (error, response, body) {
+	    if (!error && response.statusCode == 200) {
+	        options = JSON.parse(body);
+	        console.log("Retrieved settings: " + JSON.stringify(options));
+	    }
+	});
+}
+
+setInterval(updateSettings, 5000)
 
 options = {
 	mode: "photo",

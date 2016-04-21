@@ -17,8 +17,8 @@
 						  rotation: $('#rotation').val()
 				  }
 				  $.ajax({
-					  url: "/update/settings",
-					  method: 'post',
+					  url: "/options",
+					  method: 'put',
 					  data: options
 					}).done(function() {
 						alert('Settings updated!')

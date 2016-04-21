@@ -10,7 +10,7 @@ var s3 = new AWS.S3({
 	secretAccessKey: settings.s3.secret_key
 })
 
-console.log(JSON.stringify(settings))
+console.log(JSON.stringify(options))
 
 var listParams = {
   Bucket: 'bensmith',

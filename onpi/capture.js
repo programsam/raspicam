@@ -18,7 +18,7 @@ function updateSettings() {
 	        options = JSON.parse(body);
 	        console.log("Retrieved settings: " + JSON.stringify(options));
 	        console.log("Updating camera settings...")
-        	camera.set("rot", options.rotation)
+        	camera.set("rotation", options.rotation)
 	    }
 	});
 }

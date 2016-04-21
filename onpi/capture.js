@@ -17,16 +17,24 @@ function updateSettings() {
 	    if (!error && response.statusCode == 200) {
 	        options = JSON.parse(body);
 	        console.log("Retrieved settings: " + JSON.stringify(options));
-	        options = {
+	        cameraOptions = {
 	        		mode: "photo",
 	        		output: __dirname + '/pics/cam.jpg',
 	        		rot: settings.rotation
 	        	}
         	console.log("Setting up the camera...")
-        	camera = new RaspiCam(options);
+        	camera = new RaspiCam(cameraOptions);
 	    }
 	});
 }
+
+cameraOptions = {
+		mode: "photo",
+		output: __dirname + '/pics/cam.jpg',
+		rot: settings.rotation
+	}
+console.log("Setting up the camera...")
+camera = new RaspiCam(cameraOptions);
 
 setInterval(updateSettings, 5000)
 

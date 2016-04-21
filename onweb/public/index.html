@@ -13,7 +13,8 @@
 	<script>
 	      function refreshList() {
 		   $.get( "/list", function( data ) {
-			   toAdd = "<a href='javascript:clear()'>Clear</a>"
+			   toAdd = "<a href='javascript:clear()'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>"
+			   toAdd += "<a href='javascript:refreshList()'><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span></a>"
 			   toAdd += "<div class='row'>"
 			   var i = 0;
 			  for (var j=0;j<data.length;j++)

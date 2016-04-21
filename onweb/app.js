@@ -59,6 +59,10 @@ var deleteParams = {
   Delete: {},
 };
 
+app.put('/options', function(req, res) {
+	console.log("Got update options: " + JSON.stringify(req.body))
+})
+
 app.post('/delete', function (req, res) {
 	console.log("Request body was: " + JSON.stringify(req.body))
 	deleteParams.Delete.Objects = []

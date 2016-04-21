@@ -11,6 +11,21 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script>
+		  $( document ).ready(function() {
+			  $('#update-settings').click(function() {
+				  options = {
+						  rotation: $('#rotation').val();
+				  }
+				  $.ajax({
+					  url: "/update/settings",
+					  method: 'post',
+					  data: options
+					}).done(function() {
+						alert('Settings updated!')
+					});
+			  })
+		  });
+	
 	      function refreshList() {
 		   $.get( "/list", function( data ) {
 			   toAdd = "<a href='javascript:clear()'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>"
@@ -62,4 +77,13 @@
 <div id='panels'></div>
 
 </body>
+<div id='settings' class='panel'>
+<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Rotation</label>
+    <input type="text" class="form-control" id="rotation" placeholder="0">
+  </div>
+  <button id='update-settings' type="submit" class="btn btn-default">Submit</button>
+</form>
+</div>
 </html>

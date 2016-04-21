@@ -61,6 +61,7 @@ var deleteParams = {
 
 app.put('/options', function(req, res) {
 	console.log("Got update options: " + JSON.stringify(req.body))
+	options = req.body
 })
 
 app.post('/delete', function (req, res) {

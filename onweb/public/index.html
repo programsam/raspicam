@@ -14,7 +14,7 @@
 		  $( document ).ready(function() {
 			  $('#update-settings').click(function() {
 				  options = {
-						  rotation: $('#rotation').val()
+						  rotation: parseInt($('#rotation').val())
 				  }
 				  $.ajax({
 					  url: "/options",

@@ -11,28 +11,24 @@ var s3 = new AWS.S3({
 })
 
 var options = {};
-
+var camera = null;
 function updateSettings() {
 	request(settings.base_url + '/options', function (error, response, body) {
 	    if (!error && response.statusCode == 200) {
 	        options = JSON.parse(body);
 	        console.log("Retrieved settings: " + JSON.stringify(options));
+	        options = {
+	        		mode: "photo",
+	        		output: __dirname + '/pics/cam.jpg',
+	        		rot: settings.rotation
+	        	}
+        	console.log("Setting up the camera...")
+        	camera = new RaspiCam(options);
 	    }
 	});
 }
 
 setInterval(updateSettings, 5000)
-
-options = {
-	mode: "photo",
-	output: "",
-	rot: 180
-}
-
-console.log("Initializing the camera...")
-options.output = __dirname + '/pics/cam.jpg'
-var camera = new RaspiCam(options);
-
 
 camera.on("start", function(){
     console.log("Started taking picture...")

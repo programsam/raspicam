@@ -10,42 +10,40 @@ var s3 = new AWS.S3({
 	secretAccessKey: settings.s3.secret_key
 })
 
-var options = {};
-var camera = null;
-var pictureInterval = null;
-
 function updateOptions() {
 	request(settings.base_url + '/options', function (error, response, body) {
 	    if (!error && response.statusCode == 200) {
 	        options = JSON.parse(body);
 	        console.log("Retrieved settings: " + JSON.stringify(options));
-	        console.log("Updating camera settings...")
-        	camera.set("rotation", options.rotation)
-        	console.log("Setting new picture interval to " + options.interval)
-        	if (pictureInterval)
-        		clearTimeout(pictureInterval)
-        		
-        	pictureInterval = setInterval(function() {
-        		camera.start()
-        	}, options.interval)
+	        
+	        if (camera && camera.get("rotation") != options.rotation)
+	        {
+	        	console.log("Camera rotation changed from: " + camera.get("rotation") + " to " + camera.rotation)
+	        	camera.set("rotation", options.rotation)
+	        }
+	        
+	        if (pictureInterval && pictureInterval != options.interval)
+	        {
+	        	console.log("Picture interval changed from: " + pictureInterval + " to " + options.interval)
+	        	if (pictureTimer)
+	        		clearTimeout(pictureTimer)
+	        		
+	        	pictureTimer = setInterval(function() {
+	        		camera.start()
+	        	}, options.interval)
+	        }
+
 	    }
 	});
 }
-
-cameraOptions = {
-		mode: "photo",
-		output: __dirname + '/pics/cam.jpg',
-		rot: 0
-}
-console.log("Setting up the camera...")
-camera = new RaspiCam(cameraOptions);
-
-setInterval(updateOptions, 5000)
 
 camera.on("start", function(){
     console.log("Started taking picture...")
 });
 
+/**
+ * Delete whatever local copy may exist.
+ */
 function deleteLocalPicture() {
 	fs.unlink(__dirname + '/pics/cam.jpg', function (err) {
 	  if (err)
@@ -59,6 +57,9 @@ function deleteLocalPicture() {
 	});
 }
 
+/**
+ * Camera finished taking a picture. Upload and delete local copy.
+ */
 camera.on("exit", function(){
    console.log("Done taking picture. Uploading...")
 
@@ -84,4 +85,19 @@ camera.on("exit", function(){
    
 });
 
+/**
+ * Init
+ */
+var camera = null;
+var pictureTimer = null;
+var pictureInterval = 60000;
+
+console.log("Setting up the camera...")
+camera = new RaspiCam({
+	mode: "photo",
+	output: __dirname + '/pics/cam.jpg',
+	rot: 0
+});
+
+setInterval(updateOptions, 10000)
 camera.start()

@@ -54,6 +54,19 @@ function updateOptions() {
 	        		camera.start()
 	        	}, options.interval)
 	        }
+	        
+	        if (! options.on || options.on == 'false')
+	        {
+	        	console.log("Deactivated. Turning off picture timer.")
+	        	if (pictureTimer)
+	        		clearTimeout(pictureTimer)
+	        }
+	        else if (pictureTimer == null)
+	        {
+	        	pictureTimer = setInterval(function() {
+	        		camera.start()
+	        	}, options.interval)
+	        }
 
 	    }
 	});

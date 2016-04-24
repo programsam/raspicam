@@ -31,7 +31,8 @@
 				  url: "/options",
 				  method: 'get',
 			  }).done(function(options) {
-				  alert('Options: ' + JSON.stringify(options))
+				  $('#rotation').val(options.rotation);
+				  $('#interval').val(options.interval);
 			  })
 			  
 		  });

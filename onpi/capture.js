@@ -64,6 +64,7 @@ function updateOptions() {
 	        }
 	        else if (pictureTimer == null)
 	        {
+	        	console.log("Activated! Setting picture interval!")
 	        	pictureTimer = setInterval(function() {
 	        		camera.start()
 	        	}, options.interval)

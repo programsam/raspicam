@@ -16,7 +16,7 @@
 				  options = {
 						  rotation: parseInt($('#rotation').val()),
 						  interval: parseInt($('#interval').val()),
-						  on: $('#active').is(':checked')
+						  on: $('#active').is(':checked') === 'true'
 				  }
 				  $.ajax({
 					  url: "/options",

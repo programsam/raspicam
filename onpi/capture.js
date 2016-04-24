@@ -55,9 +55,10 @@ function updateOptions() {
 	        	}, options.interval)
 	        }
 	        
-	        if (! options.on || options.on == 'false')
+	        if (! options.on || options.on == 'false' && pictureTimer != null)
 	        {
 	        	console.log("Deactivated. Turning off picture timer.")
+	        	pictureTimer = null;
 	        	if (pictureTimer)
 	        		clearTimeout(pictureTimer)
 	        }

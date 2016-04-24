@@ -16,7 +16,7 @@
 				  options = {
 						  rotation: parseInt($('#rotation').val()),
 						  interval: parseInt($('#interval').val()),
-						  on: true
+						  on: $('#active').is(':checked')
 				  }
 				  $.ajax({
 					  url: "/options",
@@ -33,6 +33,7 @@
 			  }).done(function(options) {
 				  $('#rotation').val(options.rotation);
 				  $('#interval').val(options.interval);
+				  $('#active').attr('checked', options.on)
 			  })
 			  
 		  });
@@ -96,7 +97,7 @@
   <input type="text" class="form-control" id="interval" placeholder="60000">
   <div class="checkbox">
   <label>
-    <input type="checkbox" value="" checked>
+    <input id='active' type="checkbox" value="" checked>
     Capture Pictures
   </label>
 </div>

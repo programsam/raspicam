@@ -35,7 +35,7 @@ function updateOptions() {
 	request(settings.base_url + '/options', function (error, response, body) {
 	    if (!error && response.statusCode == 200) {
 	        options = JSON.parse(body);
-	        console.log("Retrieved settings: " + JSON.stringify(options));
+	        console.log("Settings heartbeat: " + JSON.stringify(options));
 	        
 	        if (camera && camera.get("rotation") != options.rotation)
 	        {
@@ -46,6 +46,7 @@ function updateOptions() {
 	        if (pictureInterval != options.interval)
 	        {
 	        	console.log("Picture interval changed from: " + pictureInterval + " to " + options.interval)
+	        	pictureInterval = options.interval
 	        	if (pictureTimer)
 	        		clearTimeout(pictureTimer)
 	        		

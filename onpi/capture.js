@@ -22,7 +22,7 @@ function updateOptions() {
 	        	camera.set("rotation", options.rotation)
 	        }
 	        
-	        if (pictureInterval && pictureInterval != options.interval)
+	        if ((pictureInterval && pictureInterval != options.interval) || pictureTimer == null)
 	        {
 	        	console.log("Picture interval changed from: " + pictureInterval + " to " + options.interval)
 	        	if (pictureTimer)
@@ -36,10 +36,6 @@ function updateOptions() {
 	    }
 	});
 }
-
-camera.on("start", function(){
-    console.log("Started taking picture...")
-});
 
 /**
  * Delete whatever local copy may exist.
@@ -97,6 +93,10 @@ camera = new RaspiCam({
 	mode: "photo",
 	output: __dirname + '/pics/cam.jpg',
 	rot: 0
+});
+
+camera.on("start", function(){
+    console.log("Started taking picture...")
 });
 
 setInterval(updateOptions, 10000)

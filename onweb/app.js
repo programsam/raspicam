@@ -62,6 +62,7 @@ var deleteParams = {
 app.put('/options', function(req, res) {
 	console.log("Got update options: " + JSON.stringify(req.body))
 	options = req.body
+	options.on = (options.on === 'true')
 	res.send("OK!")
 })
 

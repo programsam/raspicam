@@ -26,6 +26,14 @@
 						alert('Settings updated!')
 					});
 			  })
+			  
+			  $.ajax({
+				  url: "/options",
+				  method: 'get',
+			  }).done(function(options) {
+				  alert('Options: ' + JSON.stringify(options))
+			  })
+			  
 		  });
 	
 	      function refreshList() {

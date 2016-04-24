@@ -31,7 +31,6 @@ camera.start()
 /**
  * Begin functions.
  */
-
 function updateOptions() {
 	request(settings.base_url + '/options', function (error, response, body) {
 	    if (!error && response.statusCode == 200) {
@@ -44,7 +43,7 @@ function updateOptions() {
 	        	camera.set("rotation", options.rotation)
 	        }
 	        
-	        if ((pictureInterval && pictureInterval != options.interval) || pictureTimer == null)
+	        if (pictureInterval != options.interval)
 	        {
 	        	console.log("Picture interval changed from: " + pictureInterval + " to " + options.interval)
 	        	if (pictureTimer)

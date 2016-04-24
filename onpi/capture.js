@@ -10,6 +10,28 @@ var s3 = new AWS.S3({
 	secretAccessKey: settings.s3.secret_key
 })
 
+var camera = null;
+var pictureTimer = null;
+var pictureInterval = 60000;
+
+console.log("Setting up the camera...")
+camera = new RaspiCam({
+	mode: "photo",
+	output: __dirname + '/pics/cam.jpg',
+	rot: 0
+});
+
+camera.on("start", function(){
+    console.log("Started taking picture...")
+});
+
+setInterval(updateOptions, 10000)
+camera.start()
+
+/**
+ * Begin functions.
+ */
+
 function updateOptions() {
 	request(settings.base_url + '/options', function (error, response, body) {
 	    if (!error && response.statusCode == 200) {
@@ -80,24 +102,3 @@ camera.on("exit", function(){
    });
    
 });
-
-/**
- * Init
- */
-var camera = null;
-var pictureTimer = null;
-var pictureInterval = 60000;
-
-console.log("Setting up the camera...")
-camera = new RaspiCam({
-	mode: "photo",
-	output: __dirname + '/pics/cam.jpg',
-	rot: 0
-});
-
-camera.on("start", function(){
-    console.log("Started taking picture...")
-});
-
-setInterval(updateOptions, 10000)
-camera.start()

@@ -55,6 +55,7 @@ s3.listObjects(listParams, function(err, data) {
 			  dl.on('end', function()
 					  {
 				  			console.log("Download complete.");
+				  			callback();
 				  	});
 		  }, function (err) {
 			  if (err)
@@ -64,3 +65,4 @@ s3.listObjects(listParams, function(err, data) {
 		  })
 	  }
 })
+

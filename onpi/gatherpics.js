@@ -63,11 +63,10 @@ s3.listObjects(listParams, function(err, data) {
 						  {
 					  			console.log("Download complete.");
 					  	});
-				  downloads.push(dl)
+				  downloads[downloadIndex] = dl;
 				  picIndex++;
 				  downloadIndex++;
 			  }
-			  sleep.sleep(10);
 		  }
 	  }
 });

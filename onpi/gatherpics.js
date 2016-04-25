@@ -1,7 +1,7 @@
 var FastDownload = require('fast-download');
 var AWS = require('aws-sdk')
 var settings = require('./settings')
-var sleep = require('sleep')
+var async = require('async')
 
 var s3 = new AWS.S3({
 	accessKeyId: settings.s3.access_key,
@@ -40,33 +40,27 @@ s3.listObjects(listParams, function(err, data) {
 			  }
 		  }
 		  console.log("Objects parsed. Beginning downloads...");
-		  var downloads = [];
-		  var picIndex = 0;
-		  while (true)
-		  {
-			  var downloadIndex = 0;
-			  while (downloads.length <= 10)
+		  async.eachLimit(toSend, 10, function(thisPic, callback) {
+			  var dl = new FastDownload(thisPic.url, {
+				  destFile: "./pics/" + thisPic.timestamp + ".jpg"
+			  });
+			  dl.on('error', function(error)
+					 {
+				  		console.log("Error with download of " + thisPic.url)
+				  	})
+			  dl.on('start', function(dl)
+					  {
+				  			console.log("Started download " + thisPic.url);
+				  	})
+			  dl.on('end', function()
+					  {
+				  			console.log("Download complete.");
+				  	});
+		  }, function (err) {
+			  if (err)
 			  {
-				  console.log("Starting download #" + downloadIndex)
-				  var dl = new FastDownload(toSend[picIndex].url, {
-					  destFile: "./pics/" + picIndex + ".jpg"
-				  });
-				  dl.on('error', function(error)
-						 {
-					  		console.log("Error with download #" + downloadIndex + ": " + err)
-					  	})
-				  dl.on('start', function(dl)
-						  {
-					  			console.log("Started download " + toSend[picIndex].url);
-					  	})
-				  dl.on('end', function()
-						  {
-					  			console.log("Download complete.");
-					  	});
-				  downloads[downloadIndex] = dl;
-				  picIndex++;
-				  downloadIndex++;
+				  console.log("There was an error: " + err)
 			  }
-		  }
+		  })
 	  }
-});
+})

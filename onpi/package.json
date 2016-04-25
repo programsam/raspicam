@@ -7,6 +7,6 @@
     "request": "*",
     "aws-sdk": "*",
     "fast-download": "*",
-    "sleep": "*"
+    "async": "*"
   }
 }

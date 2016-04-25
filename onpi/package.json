@@ -5,6 +5,7 @@
   "dependencies": {
     "raspicam": "*",
     "request": "*",
-    "aws-sdk": "*"
+    "aws-sdk": "*",
+    "fast-download": "*"
   }
 }

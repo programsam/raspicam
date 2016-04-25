@@ -42,6 +42,12 @@ s3.listObjects(listParams, function(err, data) {
 		  for (var k=0;k<toSend.length;k++)
 		  {
 			  var dl = new FastDownload(toSend[k].url, {});
+			  dl.on('error', function(error){throw error;})
+			  dl.on('start', function(dl)
+					  {
+				  			console.log("Started download " + k + " for " + toSend[k].url);
+				  	})
+			  dl.on('end', function(){console.log('ended');});
 		  }
 	  }
 });

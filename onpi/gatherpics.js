@@ -45,12 +45,18 @@ s3.listObjects(listParams, function(err, data) {
 			  var dl = new FastDownload(toSend[k].url, {
 				  destFile: "./pics/" + k + ".jpg"
 			  });
-			  dl.on('error', function(error){throw error;})
+			  dl.on('error', function(error)
+					 {
+				  		console.log("Error with download #" + k + ": " + err)
+				  	})
 			  dl.on('start', function(dl)
 					  {
 				  			console.log("Started download " + toSend[k].url);
 				  	})
-			  dl.on('end', function(){console.log('ended');});
+			  dl.on('end', function()
+					  {
+				  			console.log("Download #" + k + " completed.");
+				  	});
 		  }
 	  }
 });

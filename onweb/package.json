@@ -5,6 +5,7 @@
   "dependencies": {
     "express": "*",
     "aws-sdk": "*",
-    "body-parser": "*"
+    "body-parser": "*",
+    "fast-download": "*"
   }
 }

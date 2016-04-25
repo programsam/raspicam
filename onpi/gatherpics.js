@@ -1,3 +1,4 @@
+var FastDownload = require('fast-download');
 var AWS = require('aws-sdk')
 var settings = require('./settings')
 
@@ -11,6 +12,7 @@ var listParams = {
 	  Prefix: 'dropcam/'
 	};
 
+console.log("Get a list of all pictures...")
 s3.listObjects(listParams, function(err, data) {
 	  if (err)
 	  {
@@ -20,6 +22,7 @@ s3.listObjects(listParams, function(err, data) {
 	  else
 	  {
 		  var toSend = []
+		  console.log(data.Contents.length + " objects retrieved.")
 		  for (var j=0;j<data.Contents.length;j++)
 		  {
 			  var thisObject = {}
@@ -35,6 +38,10 @@ s3.listObjects(listParams, function(err, data) {
 				  toSend.push(thisObject)
 			  }
 		  }
-		  console.log(toSend);
+		  console.log("Objects parsed. Beginning downloads...");
+		  for (var k=0;k<toSend.length;k++)
+		  {
+			  var dl = new FastDownload(toSend[k].url, {});
+		  }
 	  }
 });

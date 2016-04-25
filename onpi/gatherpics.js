@@ -39,13 +39,14 @@ s3.listObjects(listParams, function(err, data) {
 			  }
 		  }
 		  console.log("Objects parsed. Beginning downloads...");
-		  for (var k=0;k<toSend.length;k++)
+		  for (var k=0;k<5;k++)
 		  {
+			  console.log("Starting download #" + k)
 			  var dl = new FastDownload(toSend[k].url, {});
 			  dl.on('error', function(error){throw error;})
 			  dl.on('start', function(dl)
 					  {
-				  			console.log("Started download " + k + " for " + toSend[k].url);
+				  			console.log("Started download " + toSend[k].url);
 				  	})
 			  dl.on('end', function(){console.log('ended');});
 		  }

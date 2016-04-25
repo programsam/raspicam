@@ -6,6 +6,7 @@
     "raspicam": "*",
     "request": "*",
     "aws-sdk": "*",
-    "fast-download": "*"
+    "fast-download": "*",
+    "sleep": "*"
   }
 }

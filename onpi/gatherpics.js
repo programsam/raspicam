@@ -1,6 +1,7 @@
 var FastDownload = require('fast-download');
 var AWS = require('aws-sdk')
 var settings = require('./settings')
+var sleep = require('sleep')
 
 var s3 = new AWS.S3({
 	accessKeyId: settings.s3.access_key,
@@ -39,24 +40,34 @@ s3.listObjects(listParams, function(err, data) {
 			  }
 		  }
 		  console.log("Objects parsed. Beginning downloads...");
-		  for (var k=0;k<10;k++)
+		  var downloads = [];
+		  var picIndex = 0;
+		  while (true)
 		  {
-			  console.log("Starting download #" + k)
-			  var dl = new FastDownload(toSend[k].url, {
-				  destFile: "./pics/" + k + ".jpg"
-			  });
-			  dl.on('error', function(error)
-					 {
-				  		console.log("Error with download #" + k + ": " + err)
-				  	})
-			  dl.on('start', function(dl)
-					  {
-				  			console.log("Started download " + toSend[k].url);
-				  	})
-			  dl.on('end', function()
-					  {
-				  			console.log("Download #" + k + " completed.");
-				  	});
+			  var downloadIndex = 0;
+			  while (downloads.length <= 10)
+			  {
+				  console.log("Starting download #" + downloadIndex)
+				  var dl = new FastDownload(toSend[picIndex].url, {
+					  destFile: "./pics/" + picIndex + ".jpg"
+				  });
+				  dl.on('error', function(error)
+						 {
+					  		console.log("Error with download #" + downloadIndex + ": " + err)
+					  	})
+				  dl.on('start', function(dl)
+						  {
+					  			console.log("Started download " + toSend[picIndex].url);
+					  	})
+				  dl.on('end', function()
+						  {
+					  			console.log("Download complete.");
+					  	});
+				  downloads.push(dl)
+				  picIndex++;
+				  downloadIndex++;
+			  }
+			  sleep.sleep(10);
 		  }
 	  }
 });
